@@ -1,0 +1,15 @@
+int ledpin=13;
+int swpin=12;
+
+void setup() {
+  pinMode(ledpin,OUTPUT);
+  pinMode(swpin,INPUT_PULLUP);
+}
+
+void loop() {
+  int val=digitalRead(swpin);
+  if(val==0){
+    digitalWrite(ledpin,HIGH);
+  }
+    digitalWrite(ledpin,LOW);
+}
