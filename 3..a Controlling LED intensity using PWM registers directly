@@ -1,0 +1,40 @@
+const int fadepin = 13;
+int v = LOW;
+int low = 0;
+int high = 1000;
+int constant = 5;
+long a = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(fadepin, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(fadepin, HIGH);
+  a += constant;
+  blink(a + 4, 4);
+  if (a > 255 || a < 0) {
+    constant = constant * -1;
+  }
+}
+void blink(int low, int high) {
+  int c = 5;
+  while (c > 0) {
+    long period = 8000;
+    long pt = period * high / (high + low);
+    int v = LOW;
+    digitalWrite(fadepin, v);
+    
+    while (period > 0) {
+      if (period < pt && v == LOW) {
+        v = HIGH;
+        digitalWrite(fadepin, v);
+       
+      }
+      period = period - 1;
+    }
+    c = c - 1;
+  }
+}
