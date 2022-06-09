@@ -1,0 +1,35 @@
+#include<IRremote.h>
+IRrecv IR(2);
+int serpin=7;
+void setup() {
+  pinMode(serpin,OUTPUT);
+  IR.enableIRIn();
+  Serial.begin(9600);
+  // put your setup code here, to run once:
+}
+
+void loop() {
+  if(IR.decode()){
+    if(IR.decodedIRData.decodedRawData == 0xEF10BF00 ){
+      for(int i=0;i<60;i++){
+      digitalWrite(serpin,HIGH);
+      delayMicroseconds(2200);
+      digitalWrite(serpin,LOW);
+      delayMicroseconds(17909);
+        delay(50);
+      }
+    }
+    if(IR.decodedIRData.decodedRawData == 0xF30CBF00 ){
+      for(int i=0;i<60;i++){
+      digitalWrite(serpin,HIGH);
+      delayMicroseconds(500);
+      digitalWrite(serpin,LOW);
+      delayMicroseconds(25000);
+        delay(50);
+      }
+    }
+    IR.resume();
+    }
+  // put your main code here, to run repeatedly:
+
+}
